@@ -9,7 +9,7 @@ export const Canvas = (props) => {
         let ctx = canvas.getContext('2d');
 
         const render = () => {
-            draw(ctx)
+            draw(ctx);
         }
         render();
 
@@ -19,6 +19,7 @@ export const Canvas = (props) => {
             ref={ref}
             width={props.width}
             height={props.height}
+            style={{'display':'block'}}
         />
     );
 }

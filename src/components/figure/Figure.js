@@ -14,19 +14,25 @@ export const Figure = (props) => {
             case 'square':
                 setDraw((ctx) => (ctx) => {
                     ctx.clearRect(0, 0, width, height);
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, props.x, props.y);
+                    ctx.fillStyle = 'black';
                     ctx.strokeRect(0, 0, props.x, props.y);
                 });
                 break;
             case 'triangle':
                 setDraw((ctx) => (ctx) => {
                     ctx.clearRect(0, 0, width, height);
+                    ctx.beginPath();
                     ctx.moveTo(0, 0);
-                    ctx.lineTo(0, props.y);
-                    ctx.moveTo(0, props.y);
                     ctx.lineTo(props.x, props.y);
-                    ctx.moveTo(props.x, props.y)
+                    ctx.lineTo(0, props.y);
+                    ctx.fillStyle = 'white';
+                    ctx.fill();
+                    ctx.fillStyle = 'black';
                     ctx.lineTo(0, 0);
                     ctx.stroke();
+                    ctx.closePath();
                 });
                 break;
             default:

@@ -1,10 +1,11 @@
 import React from 'react'
-import { Figure } from '../../components/figure/Figure';
+import { Thumbnail } from '../../components/thumbnail/Thumbnail';
 
 export const Calculator = () => {
     return (
         <div style={{padding: "10px"}}>
-            <Figure kind='triangle' x={50} y={50} z={0}/>
+            <Thumbnail kind='square' x={60} y={50} />
+            <Thumbnail kind='triangle' x={60} y={50} />
         </div>
     )
 }

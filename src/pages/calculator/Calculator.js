@@ -40,16 +40,9 @@ export const Calculator = () => {
             handleClick,
         }
     ];
-
-    return (
-        <div>
-            <div>
-                <p className='mb-2 text-center'>Available areas</p>
-                <ThumbnailTools 
-                    tools={tools}
-                />
-            </div>
-            <div className="w-full max-w-sm">
+    const renderDataIO = () => {
+        return <>
+        <div className="w-full max-w-sm">
                 <div className="md:flex md:items-center mb-6">
                     <div className="md:w-1/3">
                         <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="width">
@@ -96,8 +89,19 @@ export const Calculator = () => {
             </div>
             <div>
                 <p>{`Kind: ${kind}`}</p>
-                <p>{`Area: ${area}`}</p>
+                { area > 0 && <p>{`Area: ${area}`}</p>}
             </div>
+        </>
+    }
+    return (
+        <div>
+            <div>
+                <p className='mb-2 text-center'>Available areas</p>
+                <ThumbnailTools 
+                    tools={tools}
+                />
+            </div>
+            {kind && renderDataIO()}
         </div>
     )
 }

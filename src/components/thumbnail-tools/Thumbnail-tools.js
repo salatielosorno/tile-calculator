@@ -6,8 +6,15 @@ export const ThumbnailTools = props => {
         <div>
             {
                 props.tools ?
-                    props.tools.map((tool, index) => <Thumbnail key={index} kind={tool.kind} x={tool.x} y={tool.y} /> ) 
-                    : 'tools not defined'
+                    props.tools.map((tool, index) => 
+                        <Thumbnail 
+                            key={index} 
+                            kind={tool.kind} 
+                            x={tool.x} 
+                            y={tool.y} 
+                            handleClick={tool.handleClick} 
+                        />
+                    ) : 'tools not defined'
             }
         </div>
     )

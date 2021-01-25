@@ -1,7 +1,12 @@
 {
-  "name": "calculator-de-loseta",
+  "name": "tile-calculator",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salatielosorno/tile-calculator.git"
+  },
+  "author": "Salatiel Osorno",
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",

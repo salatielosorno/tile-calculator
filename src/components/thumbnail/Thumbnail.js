@@ -4,7 +4,7 @@ import { Figure } from '../figure/Figure';
 export const Thumbnail = (props) => {
     return (
         <div 
-            className='p-4 inline-block shadow mr-2 mb-2 cursor-pointer hover:bg-purple-700 hover:text-white'
+            className={`p-4 inline-block shadow mr-2 mb-2 cursor-pointer hover:bg-purple-700 hover:text-white ${props.index === props.isActive ? 'bg-purple-700 text-white': ''}`}
             onClick={()=>{
                 props.handleClick(props)
             }}

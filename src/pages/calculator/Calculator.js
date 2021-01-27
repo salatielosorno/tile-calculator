@@ -4,6 +4,7 @@ import { Thumbnail } from '../../components/thumbnail/Thumbnail';
 const step = {
     CHOOSE_FIGURE: 'chooseFigure',
     ENTER_MEASURES: 'enterMeasures',
+    TILE_PERFORMANCE: 'tilePerformance',
     SHOW_RESULT: 'showResult'
 
 }
@@ -14,12 +15,17 @@ export const Calculator = () => {
     const [height, setHeight] = useState(0);
     const [tile, setTile] = useState(0)
     const [nextStep, setNextStep] = useState(step.CHOOSE_FIGURE);
+    const [tilePerformance, setTilePerformance] = useState(0);
+    const [boxToBuy, setBoxToBuy] = useState(0);
     
     const handleClick = (thumb) => {
         setKind(thumb.kind);
         setArea(0);
         setHeight(0);
         setWidth(0);
+        setTile(0);
+        setTilePerformance(0);
+        setBoxToBuy(0);
     }
 
     const tools = [
@@ -50,9 +56,13 @@ export const Calculator = () => {
                 break;
         }
         area = Math.round((area + Number.EPSILON) * 100) / 100;
-        const tile = Math.round(((area * 1.05) + Number.EPSILON) * 100) / 100;;
+        const tile = Math.round(((area * 1.05) + Number.EPSILON) * 100) / 100;
         setArea(area);
         setTile(tile);
+    }
+
+    const calculateBoxToBuy = () => {
+        setBoxToBuy(Math.ceil(Math.round(((tile / tilePerformance) + Number.EPSILON) * 100) / 100));
     }
 
     const title = (text) => {
@@ -119,7 +129,29 @@ export const Calculator = () => {
                     />
                 </div>
             </div>
-            {renderButton('Continue', () => { calculate(); setNextStep(step.SHOW_RESULT) })}
+            {renderButton('Continue', () => { calculate(); setNextStep(step.TILE_PERFORMANCE) })}
+        </>
+    }
+
+    const enterTilePerfomance = () => {
+        return <>
+            <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                    <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="tilePerformance">
+                        Performance per box
+                    </label>
+                </div>
+                <div className="md:w-2/3">
+                    <input 
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" 
+                        id="tilePerformance" 
+                        type="text"
+                        value={tilePerformance}
+                        onChange={(e) => setTilePerformance(e.target.value)}
+                    />
+                </div>
+            </div>
+            {renderButton('Continue', () => { calculateBoxToBuy(); setNextStep(step.SHOW_RESULT) })}
         </>
     }
 
@@ -128,8 +160,10 @@ export const Calculator = () => {
         <>
             <div className='md:flex md:items-center mb-6 justify-center'>
                 <div>
-                    <p className='p-2 text-center'>{`Area: ${area}`}</p>
-                    <p className='p-2'><span>You should </span><span className='font-bold'>{`buy ${tile} m2`}</span> of tile</p>
+                    <p className='p-2'>{`Area: ${area} m2`}</p>
+                    <p className='p-2'>{`Tile: ${tile} m2`}</p>
+                    <p className='p-2'>{`Tile performance per box: ${tilePerformance} m2`}</p>
+                    <p className='p-2'>You should <span className='font-bold'>{`buy ${boxToBuy} ${ boxToBuy > 1 ? 'boxes' : 'box' }`}</span> of tile</p>
                 </div>
             </div>
             {renderButton('Try again', () => {
@@ -155,6 +189,15 @@ export const Calculator = () => {
                             <Thumbnail kind={kind} x={50} y={50} handleClick={()=>{}}/>
                         </div>
                         {enterMeasures()}
+                    </>);
+            case step.TILE_PERFORMANCE:
+                return (
+                    <>
+                        {title('Enter tile performance')}
+                        <div className='mb-4 text-center'>
+                            <Thumbnail kind={kind} x={50} y={50} handleClick={()=>{}}/>
+                        </div>
+                        {enterTilePerfomance()}
                     </>);
             case step.SHOW_RESULT:
                 return (

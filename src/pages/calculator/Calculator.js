@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { ThumbnailTools } from '../../components/thumbnail-tools/Thumbnail-tools'
+import { Thumbnail } from '../../components/thumbnail/Thumbnail';
 const step = {
     CHOOSE_FIGURE: 'chooseFigure',
     ENTER_MEASURES: 'enterMeasures',
@@ -11,6 +12,7 @@ export const Calculator = () => {
     const [area, setArea] = useState(0);
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
+    const [tile, setTile] = useState(0)
     const [nextStep, setNextStep] = useState(step.CHOOSE_FIGURE);
     
     const handleClick = (thumb) => {
@@ -36,16 +38,21 @@ export const Calculator = () => {
     ];
 
     const calculate = () => {
+        let area;
         switch (kind) {
             case 'square':
-                setArea(width * height);
+                area = width * height;
                 break;
             case 'triangle':
-                setArea((width * height) / 2);
+                area = (width * height) / 2
                 break;
             default:
                 break;
         }
+        area = Math.round((area + Number.EPSILON) * 100) / 100;
+        const tile = Math.round(((area * 1.05) + Number.EPSILON) * 100) / 100;;
+        setArea(area);
+        setTile(tile);
     }
 
     const title = (text) => {
@@ -121,8 +128,8 @@ export const Calculator = () => {
         <>
             <div className='md:flex md:items-center mb-6 justify-center'>
                 <div>
-                    <p className='p-2'>{`Kind: ${kind}`}</p>
-                    <p className='p-2'>{`Area: ${area}`}</p>
+                    <p className='p-2 text-center'>{`Area: ${area}`}</p>
+                    <p className='p-2'><span>You should </span><span className='font-bold'>{`buy ${tile} m2`}</span> of tile</p>
                 </div>
             </div>
             {renderButton('Try again', () => {
@@ -137,19 +144,25 @@ export const Calculator = () => {
             case step.CHOOSE_FIGURE:
                 return (
                     <>
-                    {title('Choose figure')}
+                    {title('Choose the kind of area')}
                     {chooseFigure()}
                     </>);
             case step.ENTER_MEASURES:
                 return (
                     <>
-                        {title(`Enter measures of the ${kind}`)}
+                        {title('Enter measures: use m2')}
+                        <div className='mb-4 text-center'>
+                            <Thumbnail kind={kind} x={50} y={50} handleClick={()=>{}}/>
+                        </div>
                         {enterMeasures()}
                     </>);
             case step.SHOW_RESULT:
                 return (
                     <>
-                        {title('Result')}
+                        {/* {title('Result')} */}
+                        <div className='mb-4 text-center'>
+                            <Thumbnail kind={kind} x={50} y={50} handleClick={()=>{}}/>
+                        </div>
                         {showResult()}
                     </>);
             default:
@@ -159,6 +172,7 @@ export const Calculator = () => {
     
     return (
         <div className="w-full max-w-sm">
+            <h1 className='text-center font-bold text-lg p-6'>Tile Calculator</h1>
             {renderStep()}
         </div>
     )

@@ -49,33 +49,32 @@ export const Calculator = () => {
     }
 
     const title = (text) => {
-        return <p className='mb-2 text-center'>{text}</p>
+        return <p className='mb-4 text-center'>{text}</p>
     }
 
     const renderButton = (text, handleClick) => {
         return (
-            <div className="md:flex md:items-center">
-                <div className="md:w-1/3"></div>
-                <div className="md:w-2/3">
-                    <button 
-                        className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' 
-                        onClick={handleClick}
-                    >
-                        {text}
-                    </button>
-                </div>
+            <div className="md:flex md:items-center justify-center">
+                <button 
+                    className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' 
+                    onClick={handleClick}
+                >
+                    {text}
+                </button>
             </div>
         )
     }
 
     const chooseFigure = () => {
         return <>
-            <ThumbnailTools 
-                tools={tools}
-            />
-            {renderButton('Continue', () => {
-                setNextStep(step.ENTER_MEASURES);
-            })}
+        <div className='md:flex md:items-center mb-6 justify-center'>
+                <ThumbnailTools 
+                    tools={tools}
+                />
+        </div>
+        {renderButton('Continue', () => {
+            setNextStep(step.ENTER_MEASURES);
+        })}
         </>;
     }
     
@@ -119,13 +118,17 @@ export const Calculator = () => {
 
     const showResult = () => {
         return (
-            <>
-                <p>{`Kind: ${kind}`}</p>
-                <p>{`Area: ${area}`}</p>
-                {renderButton('Try again', () => {
-                    setNextStep(step.CHOOSE_FIGURE);
-                })}
-            </>
+        <>
+            <div className='md:flex md:items-center mb-6 justify-center'>
+                <div>
+                    <p className='p-2'>{`Kind: ${kind}`}</p>
+                    <p className='p-2'>{`Area: ${area}`}</p>
+                </div>
+            </div>
+            {renderButton('Try again', () => {
+                setNextStep(step.CHOOSE_FIGURE);
+            })}
+        </>
         )
     }
 
@@ -133,22 +136,22 @@ export const Calculator = () => {
         switch (nextStep) {
             case step.CHOOSE_FIGURE:
                 return (
-                <div>
+                    <>
                     {title('Choose figure')}
                     {chooseFigure()}
-                </div>);
+                    </>);
             case step.ENTER_MEASURES:
                 return (
-                    <div>
+                    <>
                         {title(`Enter measures of the ${kind}`)}
                         {enterMeasures()}
-                    </div>);
+                    </>);
             case step.SHOW_RESULT:
                 return (
-                    <div>
+                    <>
                         {title('Result')}
                         {showResult()}
-                    </div>);
+                    </>);
             default:
                 break;
         }

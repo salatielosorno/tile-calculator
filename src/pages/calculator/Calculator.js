@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 
 import { ThumbnailTools } from '../../components/thumbnail-tools/Thumbnail-tools'
 import { Thumbnail } from '../../components/thumbnail/Thumbnail';
@@ -223,8 +224,14 @@ export const Calculator = () => {
                             }
                             setShowAlert(false);
 
+                            Swal.fire({
+                                position: 'top-start',
+                                title: 'Thank you for tried it! ❤️',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                             getBoxToBuy(); 
-                            setNextStep(step.SHOW_RESULT) 
+                            setNextStep(step.SHOW_RESULT);
                         }}/>
                     </>);
             case step.SHOW_RESULT:
@@ -235,7 +242,6 @@ export const Calculator = () => {
                         </div>
                         {showResult()}
                         <Button text='Try again' handleClick={() => {
-                            alert('Thank you for tried it! ❤️');
                             cleanData();
                             setNextStep(step.CHOOSE_FIGURE);
                         }}/>

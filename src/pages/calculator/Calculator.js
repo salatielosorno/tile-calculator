@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+
 import { ThumbnailTools } from '../../components/thumbnail-tools/Thumbnail-tools'
 import { Thumbnail } from '../../components/thumbnail/Thumbnail';
+import { calculateArea, calculateBoxToBuy, calculateTileNeeded } from '../../utils/utils';
+
 const step = {
     CHOOSE_FIGURE: 'chooseFigure',
     ENTER_MEASURES: 'enterMeasures',
@@ -44,25 +47,14 @@ export const Calculator = () => {
     ];
 
     const calculate = () => {
-        let area;
-        switch (kind) {
-            case 'square':
-                area = width * height;
-                break;
-            case 'triangle':
-                area = (width * height) / 2
-                break;
-            default:
-                break;
-        }
-        area = Math.round((area + Number.EPSILON) * 100) / 100;
-        const tile = Math.round(((area * 1.05) + Number.EPSILON) * 100) / 100;
+        const area = calculateArea(kind, width, height);
+        const tile = calculateTileNeeded(area);
         setArea(area);
         setTile(tile);
     }
 
-    const calculateBoxToBuy = () => {
-        setBoxToBuy(Math.ceil(Math.round(((tile / tilePerformance) + Number.EPSILON) * 100) / 100));
+    const getBoxToBuy = () => {
+        setBoxToBuy(calculateBoxToBuy(tile, tilePerformance));
     }
 
     const title = (text) => {
@@ -71,9 +63,9 @@ export const Calculator = () => {
 
     const renderButton = (text, handleClick) => {
         return (
-            <div className="md:flex md:items-center justify-center">
+            <div className="flex items-center justify-center">
                 <button 
-                    className='shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' 
+                    className='shadow hover:bg-purple-700 bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded' 
                     onClick={handleClick}
                 >
                     {text}
@@ -84,7 +76,7 @@ export const Calculator = () => {
 
     const chooseFigure = () => {
         return <>
-        <div className='md:flex md:items-center mb-6 justify-center'>
+        <div className='flex items-center mb-6 justify-center'>
                 <ThumbnailTools 
                     tools={tools}
                 />
@@ -97,7 +89,7 @@ export const Calculator = () => {
     
     const enterMeasures = () => {
         return <>
-            <div className="md:flex md:items-center mb-6">
+            <div className="flex items-center mb-6">
                 <div className="md:w-1/3">
                     <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="width">
                         Width
@@ -113,7 +105,7 @@ export const Calculator = () => {
                     />
                 </div>
             </div>
-            <div className="md:flex md:items-center mb-6">
+            <div className="flex items-center mb-6">
                 <div className="md:w-1/3">
                     <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="large">
                         Large
@@ -135,7 +127,7 @@ export const Calculator = () => {
 
     const enterTilePerfomance = () => {
         return <>
-            <div className="md:flex md:items-center mb-6">
+            <div className="flex items-center mb-6">
                 <div className="md:w-1/3">
                     <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="tilePerformance">
                         Performance per box
@@ -151,14 +143,14 @@ export const Calculator = () => {
                     />
                 </div>
             </div>
-            {renderButton('Continue', () => { calculateBoxToBuy(); setNextStep(step.SHOW_RESULT) })}
+            {renderButton('Continue', () => { getBoxToBuy(); setNextStep(step.SHOW_RESULT) })}
         </>
     }
 
     const showResult = () => {
         return (
         <>
-            <div className='md:flex md:items-center mb-6 justify-center'>
+            <div className='flex items-center mb-6 justify-center'>
                 <div>
                     <p className='p-2'>{`Area: ${area} m2`}</p>
                     <p className='p-2'>{`Tile: ${tile} m2`}</p>

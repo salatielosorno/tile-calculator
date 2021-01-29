@@ -225,7 +225,7 @@ export const Calculator = () => {
                             setShowAlert(false);
 
                             Swal.fire({
-                                position: 'top-start',
+                                position: 'center-start',
                                 title: 'Thank you for tried it! ❤️',
                                 showConfirmButton: false,
                                 timer: 1500

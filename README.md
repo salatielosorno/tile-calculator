@@ -6,6 +6,10 @@ I think this app can growing so much but for now I provide a basic functionality
 
 If you found this app useful tell me about it. I will be glad to hear you.
 
+## Requirements
+- node v12.20.1
+- npm 6.14.10
+
 ## Install
 
 ```bash

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tile-calculator/static/css/main.042cc223.css",
+    "main.js": "/tile-calculator/static/js/main.b1827fb3.js",
+    "static/js/377.f850b8f3.chunk.js": "/tile-calculator/static/js/377.f850b8f3.chunk.js",
+    "index.html": "/tile-calculator/index.html",
+    "main.042cc223.css.map": "/tile-calculator/static/css/main.042cc223.css.map",
+    "main.b1827fb3.js.map": "/tile-calculator/static/js/main.b1827fb3.js.map",
+    "377.f850b8f3.chunk.js.map": "/tile-calculator/static/js/377.f850b8f3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.042cc223.css",
+    "static/js/main.b1827fb3.js"
+  ]
+}

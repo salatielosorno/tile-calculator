@@ -1,15 +1,22 @@
 {
   "files": {
-    "main.css": "/tile-calculator/static/css/main.042cc223.css",
-    "main.js": "/tile-calculator/static/js/main.b1827fb3.js",
-    "static/js/377.f850b8f3.chunk.js": "/tile-calculator/static/js/377.f850b8f3.chunk.js",
+    "main.css": "/tile-calculator/static/css/main.331afdb0.chunk.css",
+    "main.js": "/tile-calculator/static/js/main.ddfeb568.chunk.js",
+    "main.js.map": "/tile-calculator/static/js/main.ddfeb568.chunk.js.map",
+    "runtime-main.js": "/tile-calculator/static/js/runtime-main.d163afdf.js",
+    "runtime-main.js.map": "/tile-calculator/static/js/runtime-main.d163afdf.js.map",
+    "static/js/2.d59e812e.chunk.js": "/tile-calculator/static/js/2.d59e812e.chunk.js",
+    "static/js/2.d59e812e.chunk.js.map": "/tile-calculator/static/js/2.d59e812e.chunk.js.map",
+    "static/js/3.d8780c51.chunk.js": "/tile-calculator/static/js/3.d8780c51.chunk.js",
+    "static/js/3.d8780c51.chunk.js.map": "/tile-calculator/static/js/3.d8780c51.chunk.js.map",
     "index.html": "/tile-calculator/index.html",
-    "main.042cc223.css.map": "/tile-calculator/static/css/main.042cc223.css.map",
-    "main.b1827fb3.js.map": "/tile-calculator/static/js/main.b1827fb3.js.map",
-    "377.f850b8f3.chunk.js.map": "/tile-calculator/static/js/377.f850b8f3.chunk.js.map"
+    "static/css/main.331afdb0.chunk.css.map": "/tile-calculator/static/css/main.331afdb0.chunk.css.map",
+    "static/js/2.d59e812e.chunk.js.LICENSE.txt": "/tile-calculator/static/js/2.d59e812e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/css/main.042cc223.css",
-    "static/js/main.b1827fb3.js"
+    "static/js/runtime-main.d163afdf.js",
+    "static/js/2.d59e812e.chunk.js",
+    "static/css/main.331afdb0.chunk.css",
+    "static/js/main.ddfeb568.chunk.js"
   ]
 }

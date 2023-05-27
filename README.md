@@ -25,3 +25,6 @@ $ yarn start
 ## Preview
 
 ![Tile Calculator App](/public/tile-calculator.png)
+
+## Live 
+Test it [here](https://salatielosorno.github.io/tile-calculator)
